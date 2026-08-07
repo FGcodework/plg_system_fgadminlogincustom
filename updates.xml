@@ -6,7 +6,7 @@
         <element>fgadminlogincustom</element>
         <type>plugin</type>
         <folder>system</folder>
-        <version>1.18.0</version>
+        <version>1.99.0</version>
         <infourl title="System - FG Admin Login Customizer">https://github.com/ferino75/plg_system_fgadminlogincustom</infourl>
         <downloads>
             <downloadurl type="full" format="zip">https://github.com/ferino75/plg_system_fgadminlogincustom/releases/download/v1.18.0/plg_system_fgadminlogincustom_v1.18.0.zip</downloadurl>
