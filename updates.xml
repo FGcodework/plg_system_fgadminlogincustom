@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
     <update>
-        <name>plg_system_fgadminlogincustom</name>
+        <name>System - FG Admin Login Customizer</name>
         <description>PLG_SYSTEM_FGADMINLOGINCUSTOM_XML_DESCRIPTION</description>
         <element>fgadminlogincustom</element>
         <type>plugin</type>
