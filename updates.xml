@@ -6,7 +6,6 @@
         <element>fgadminlogincustom</element>
         <type>plugin</type>
         <folder>system</folder>
-        <client></client>
         <version>1.18.0</version>
         <infourl title="System - FG Admin Login Customizer">https://github.com/ferino75/plg_system_fgadminlogincustom</infourl>
         <downloads>
@@ -17,6 +16,7 @@
         </tags>
         <maintainer>Fero</maintainer>
         <maintainerurl>https://github.com/ferino75</maintainerurl>
-        <targetplatform name="joomla" version="6.0" />
+        <php_minimum>8.1</php_minimum>
+        <targetplatform name="joomla" version="[56]\..*" />
     </update>
 </updates>
