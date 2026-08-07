@@ -1,5 +1,12 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.18.0 (2026-08-04)
+- SECURITY: Import now deliberately never carries the `custom_js` value over. A settings JSON is something people pass between sites and colleagues, so the admin pasting it has usually not read every value in it - and `custom_js` executes on the login page, alongside the username and password inputs. Every other setting is declarative and is imported as before. If the JSON contained a Custom JavaScript value, a warning message explains that it was skipped and that it can be entered manually after review.
+- Export still includes `custom_js`, so a deliberate, reviewed transfer by hand remains possible.
+- README: added a short section explaining what the Custom JavaScript field does, why Import skips it, and the fact that on a stock Joomla setup only a Super User reaches these settings (where the field grants no privilege they do not already have) - the caution applies to settings arriving from elsewhere, or to a delegated `com_plugins` permission.
+- Considered and deliberately NOT done: sanitising/stripping the Custom CSS, Custom JavaScript or Footer text fields (it would remove the very feature those fields exist for), and a Content Security Policy on the admin login page (Joomla's own admin pages rely on inline scripts, so a CSP strict enough to matter would break the page).
+- Verified with 9 tests: foreign `custom_js` is not carried over while all other imported values are, the existing local value survives an import, no spurious warning when the JSON has no JS, an empty imported JS value does not overwrite a local one, and the export still contains `custom_js`.
+
 ## 1.17.0 (2026-08-04)
 - PHP namespace and class name aligned with the FG extension series convention (following `plg_system_fgstripcomments`): `Fero\Plugin\System\FgAdminLoginCustom\Extension\FgAdminLoginCustom` → `FG\Plugin\System\AdminLoginCustom\Extension\AdminLoginCustom`. The class file was renamed to `src/Extension/AdminLoginCustom.php`.
 - The Joomla `element` (`fgadminlogincustom`), folder name, language keys and display name are unchanged - from Joomla's point of view this is a regular update, not a new plugin. No functional change.

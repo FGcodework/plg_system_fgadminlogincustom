@@ -1,6 +1,6 @@
 <img src="assets/logo.png" width="120" alt="">
 
-# FG Admin Login Customizer plugin for Joomla
+# System - FG Admin Login Customizer plugin for Joomla
 
 ![Joomla](https://img.shields.io/badge/Joomla-6.x-blue)
 ![PHP](https://img.shields.io/badge/PHP-8.1%2B-green)
@@ -62,11 +62,31 @@ Settings are grouped into tabs:
 | **Background** | Background type (none/color/gradient/image), colors, gradient angle, image overlay. |
 | **Login card & colors** | Card background/text/radius/shadow, button colors, link color, header-button color matching. |
 | **Header bar** | Header background/text color, language-switcher visibility. |
-| **Advanced** | Custom CSS and custom JavaScript, injected only on the login page. |
-| **Export / Import** | Read-only JSON export of current settings; paste JSON here + Save (twice) to import a configuration from another site. |
+| **Advanced** | Custom CSS and custom JavaScript, injected only on the login page (see the note below). |
+| **Export / Import** | Read-only JSON export of current settings; paste JSON here + Save (twice) to import a configuration from another site. Custom JavaScript is never imported. |
 
 Every color field left empty falls back to the Atum template's own
 styling - nothing is forced unless you set it.
+
+## A note on Custom JavaScript
+
+The **Custom JavaScript** field runs its code on the administrator login
+page - the page that carries the username and password inputs. Treat it
+the way you would treat editing a template file: only ever paste code
+you wrote yourself or have actually read and understood.
+
+For that reason **Import deliberately never carries `custom_js` over**.
+A settings JSON is something people pass around ("here, use my theme"),
+and pasting one should not be able to execute someone else's code on
+your login screen. Everything else in the export is declarative and is
+imported normally; if you do want the JavaScript too, copy it across by
+hand once you have reviewed it.
+
+Note that on a stock Joomla setup only a Super User can reach the plugin
+settings, and a Super User can already install extensions or edit
+templates - so this field grants them nothing new. The caution above
+matters when settings arrive from somewhere else, or when access to
+`com_plugins` has been delegated to a lower-privileged group.
 
 ## Requirements
 

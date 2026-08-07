@@ -2,7 +2,7 @@
 
 /**
  * @package     plg_system_fgadminlogincustom
- * @version     1.17.0
+ * @version     1.18.0
  * @license     GNU General Public License version 2 or later
  *
  * Visual customization of the /administrator login page (Atum template, Joomla 4/5/6).
@@ -689,12 +689,29 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
                 $updates['import_json'] = '';
             } else {
                 unset($imported['export_json'], $imported['import_json']);
+
+                // Never let imported JSON carry executable code into the
+                // login page. An import is typically a settings blob passed
+                // between people/sites, so the admin pasting it has usually
+                // not read every value in it - and custom_js runs on the
+                // login screen, where the username/password fields live.
+                // Every other setting is declarative and safe to carry over.
+                $skippedJs = array_key_exists('custom_js', $imported);
+                unset($imported['custom_js']);
+
                 $updates += $imported;
                 $updates['import_json'] = '';
                 $this->getApplication()->enqueueMessage(
                     Text::_('PLG_SYSTEM_FGADMINLOGINCUSTOM_IMPORT_APPLIED'),
                     'message'
                 );
+
+                if ($skippedJs) {
+                    $this->getApplication()->enqueueMessage(
+                        Text::_('PLG_SYSTEM_FGADMINLOGINCUSTOM_IMPORT_JS_SKIPPED'),
+                        'warning'
+                    );
+                }
             }
         }
 
