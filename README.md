@@ -1,6 +1,6 @@
 <img src="assets/logo.png" width="120" alt="">
 
-# System - FG Admin Login Customizer plugin for Joomla
+# FG Admin Login Customizer plugin for Joomla
 
 ![Joomla](https://img.shields.io/badge/Joomla-6.x-blue)
 ![PHP](https://img.shields.io/badge/PHP-8.1%2B-green)
