@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="fgTeal" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#105060"/>
-      <stop offset="1" stop-color="#1A6877"/>
+    <linearGradient id="fgBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0C2E4F"/>
+      <stop offset="1" stop-color="#1C5687"/>
     </linearGradient>
   </defs>
 
   <!-- FG series squircle -->
-  <rect x="10" y="10" width="492" height="492" rx="96" ry="96" fill="url(#fgTeal)"/>
+  <rect x="10" y="10" width="492" height="492" rx="96" ry="96" fill="url(#fgBlue)"/>
 
   <!-- login card -->
   <rect x="116" y="106" width="280" height="292" rx="30" ry="30" fill="#FFFFFF"/>
@@ -16,9 +16,9 @@
   <circle cx="256" cy="168" r="34" fill="#FF6B4A"/>
 
   <!-- username / password fields -->
-  <rect x="150" y="228" width="212" height="26" rx="13" ry="13" fill="#D9E3E7"/>
-  <rect x="150" y="272" width="212" height="26" rx="13" ry="13" fill="#D9E3E7"/>
+  <rect x="150" y="228" width="212" height="26" rx="13" ry="13" fill="#DCE4EF"/>
+  <rect x="150" y="272" width="212" height="26" rx="13" ry="13" fill="#DCE4EF"/>
 
   <!-- log in button -->
-  <rect x="150" y="326" width="212" height="42" rx="21" ry="21" fill="#14596B"/>
+  <rect x="150" y="326" width="212" height="42" rx="21" ry="21" fill="#164A78"/>
 </svg>
