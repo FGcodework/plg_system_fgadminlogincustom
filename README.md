@@ -6,7 +6,7 @@
 ![PHP](https://img.shields.io/badge/PHP-8.1%2B-green)
 [![Version](https://img.shields.io/github/v/release/ferino75/plg_system_fgadminlogincustom?label=Version&color=orange)](https://github.com/ferino75/plg_system_fgadminlogincustom/releases)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-red)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-<img src="https://img.shields.io/github/downloads/ferino75/plg_system_fgadminlogincustom/total?color=FF6B4A" alt="Downloads">
+<img src="https://img.shields.io/github/downloads/ferino75/plg_system_fgadminlogincustom/total" alt="Downloads">
 
 A Joomla 6 system plugin that gives the `/administrator` login page its own
 visual identity - logo, background, colors, shadows, and custom CSS/JS -
