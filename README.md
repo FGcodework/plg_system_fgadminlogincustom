@@ -1,12 +1,12 @@
-<img src="assets/logo.png" width="120" alt="">
+﻿<img src="assets/logo.png" width="120" alt="">
 
 # FG Admin Login Customizer plugin for Joomla
 
-[![Version](https://img.shields.io/github/v/release/ferino75/plg_system_fgadminlogincustom?label=release)](https://github.com/ferino75/plg_system_fgadminlogincustom/releases)
+[![Version](https://img.shields.io/github/v/release/FGcodework/plg_system_fgadminlogincustom?label=release)](https://github.com/FGcodework/plg_system_fgadminlogincustom/releases)
 ![Joomla](https://img.shields.io/badge/Joomla-6.x-blue)
 ![PHP](https://img.shields.io/badge/PHP-8.1%2B-green)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-red)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-<img src="https://img.shields.io/github/downloads/ferino75/plg_system_fgadminlogincustom/total" alt="Downloads">
+<img src="https://img.shields.io/github/downloads/FGcodework/plg_system_fgadminlogincustom/total" alt="Downloads">
 
 A Joomla 6 system plugin that gives the `/administrator` login page its own
 visual identity - logo, background, colors, shadows, and custom CSS/JS -
@@ -45,7 +45,7 @@ Part of the **FG** series of Joomla extensions.
 ## Installation
 
 1. Download the latest release (`.zip`) from the
-   [Releases](https://github.com/ferino75/plg_system_fgadminlogincustom/releases) tab.
+   [Releases](https://github.com/FGcodework/plg_system_fgadminlogincustom/releases) tab.
 2. In the Joomla administrator go to **System → Install → Extensions** and
    upload the downloaded `.zip`.
 3. **System → Manage → Plugins** → find "System - FG Admin Login
