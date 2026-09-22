@@ -1,4 +1,6 @@
-﻿<img src="assets/logo.png" width="120" alt="">
+﻿<p align="center">
+  <img src="assets/logo.png" alt="plg_system_fgadminlogincustom logo" width="128" height="128">
+</p>
 
 <h1 align="center">FG Admin Login Customizer plugin for Joomla</h1>
 
