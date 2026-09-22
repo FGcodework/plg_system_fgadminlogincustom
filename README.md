@@ -1,12 +1,14 @@
 ﻿<img src="assets/logo.png" width="120" alt="">
 
-# FG Admin Login Customizer plugin for Joomla
+<h1 align="center">FG Admin Login Customizer plugin for Joomla</h1>
 
-[![Version](https://img.shields.io/github/v/release/FGcodework/plg_system_fgadminlogincustom?label=release)](https://github.com/FGcodework/plg_system_fgadminlogincustom/releases)
-![Joomla](https://img.shields.io/badge/Joomla-6.x-blue)
-![PHP](https://img.shields.io/badge/PHP-8.1%2B-green)
-[![License](https://img.shields.io/badge/License-GPLv2%2B-red)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-<img src="https://img.shields.io/github/downloads/FGcodework/plg_system_fgadminlogincustom/total" alt="Downloads">
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/FGcodework/plg_system_fgadminlogincustom?color=FF6B4A&label=release" alt="Latest release">
+  <img src="https://img.shields.io/badge/Joomla-6.x-blue.svg?logo=joomla&logoColor=white" alt="Joomla">
+  <img src="https://img.shields.io/badge/PHP-8.1%2B-purple.svg?logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/license-GPLv2%2B-green.svg" alt="License">
+  <img src="https://img.shields.io/github/downloads/FGcodework/plg_system_fgadminlogincustom/total?cacheSeconds=3600" alt="Downloads">
+</p>
 
 A Joomla 6 system plugin that gives the `/administrator` login page its own
 visual identity - logo, background, colors, shadows, and custom CSS/JS -
