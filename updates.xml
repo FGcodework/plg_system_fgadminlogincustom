@@ -2,7 +2,7 @@
 <updates>
     <update>
         <name>System - FG Admin Login Customizer</name>
-        <description>PLG_SYSTEM_FGADMINLOGINCUSTOM_XML_DESCRIPTION</description>
+        <description>Restyles the /administrator login page - custom logo, background, colors, and branding, with WCAG auto-contrast.</description>
         <element>fgadminlogincustom</element>
         <type>plugin</type>
         <folder>system</folder>
