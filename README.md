@@ -94,12 +94,6 @@ templates - so this field grants them nothing new. The caution above
 matters when settings arrive from somewhere else, or when access to
 `com_plugins` has been delegated to a lower-privileged group.
 
-## Support this project
-
-This plugin is free, open source, and always will be - no feature is locked behind a paywall. If it has saved you time, a one-off tip on Ko-fi is welcome, but entirely optional.
-
-[![ko-fi](https://storage.ko-fi.com/cdn/kofi3.png?v=3)](https://ko-fi.com/fgcodework)
-
 ## Requirements
 
 - Joomla 6 (5+)
@@ -108,6 +102,12 @@ This plugin is free, open source, and always will be - no feature is locked behi
 ## License
 
 GNU General Public License v2.0 or later - see [LICENSE](LICENSE).
+
+## Support this project
+
+This plugin is free, open source, and always will be - no feature is locked behind a paywall. If it has saved you time, a one-off tip on Ko-fi is welcome, but entirely optional.
+
+<a href="https://ko-fi.com/fgcodework"><img src="https://storage.ko-fi.com/cdn/kofi3.png?v=4" alt="ko-fi" width="180"></a>
 
 ## Changelog
 
