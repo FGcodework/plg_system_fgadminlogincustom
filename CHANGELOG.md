@@ -1,5 +1,9 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.18.1 (2026-08-04)
+- Added a "Support this plugin" note to the Plugin Options screen (merged into Joomla's native "Plugin" tab, same FG series convention as plg_system_fgemailremover): free/open-source statement, an optional Ko-fi link, and a link to fgcodework.github.io for the rest of the FG extensions. No functional change to the plugin itself.
+- Added .github/FUNDING.yml (Ko-fi) and a matching "Support this project" section + badge in README.md.
+
 ## 1.18.0 (2026-08-04)
 - SECURITY: Import now deliberately never carries the `custom_js` value over. A settings JSON is something people pass between sites and colleagues, so the admin pasting it has usually not read every value in it - and `custom_js` executes on the login page, alongside the username and password inputs. Every other setting is declarative and is imported as before. If the JSON contained a Custom JavaScript value, a warning message explains that it was skipped and that it can be entered manually after review.
 - Export still includes `custom_js`, so a deliberate, reviewed transfer by hand remains possible.

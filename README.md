@@ -10,6 +10,7 @@
   <img src="https://img.shields.io/badge/PHP-8.1%2B-purple.svg?logo=php&logoColor=white" alt="PHP">
   <img src="https://img.shields.io/badge/license-GPLv2%2B-green.svg" alt="License">
   <img src="https://img.shields.io/github/downloads/FGcodework/plg_system_fgadminlogincustom/total?cacheSeconds=3600&color=brown" alt="Downloads">
+  <a href="https://ko-fi.com/fgcodework"><img src="https://img.shields.io/badge/support-Ko--fi-F16061.svg?logo=ko-fi&logoColor=white" alt="Support on Ko-fi"></a>
 </p>
 
 A Joomla 6 system plugin that gives the `/administrator` login page its own
@@ -92,6 +93,12 @@ settings, and a Super User can already install extensions or edit
 templates - so this field grants them nothing new. The caution above
 matters when settings arrive from somewhere else, or when access to
 `com_plugins` has been delegated to a lower-privileged group.
+
+## Support this project
+
+This plugin is free, open source, and always will be - no feature is locked behind a paywall. If it has saved you time, a one-off tip on Ko-fi is welcome, but entirely optional.
+
+[![ko-fi](https://storage.ko-fi.com/cdn/kofi3.png?v=3)](https://ko-fi.com/fgcodework)
 
 ## Requirements
 
