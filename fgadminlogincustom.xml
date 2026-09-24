@@ -6,7 +6,7 @@
     <creationDate>2026-07</creationDate>
     <copyright>(C) 2026. GNU GPL v2 or later.</copyright>
     <license>GNU General Public License version 2 or later</license>
-    <version>1.18.1</version>
+    <version>1.18.2</version>
     <description>PLG_SYSTEM_FGADMINLOGINCUSTOM_XML_DESCRIPTION</description>
     <namespace path="src">FG\Plugin\System\AdminLoginCustom</namespace>
     <updateservers>
@@ -26,6 +26,15 @@
     </languages>
     <config>
         <fields name="params">
+            <fieldset name="support" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_SUPPORT">
+                <field
+                    name="support_note"
+                    type="note"
+                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_LABEL"
+                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_DESC"
+                />
+            </fieldset>
+
             <fieldset name="preset" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_PRESET">
                 <field
                     name="theme_preset"
@@ -45,12 +54,6 @@
             </fieldset>
 
             <fieldset name="basic" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_LOGO">
-                <field
-                    name="support_note"
-                    type="note"
-                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_LABEL"
-                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_DESC"
-                />
                 <field
                     name="logo"
                     type="media"

@@ -1,5 +1,8 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.18.2 (2026-08-04)
+- FIX: v1.18.1 merged the "Support this plugin" note into the same fieldset as the logo/layout settings, so both showed mixed together under the native "Plugin" tab - not the intended layout. Moved the note into its own dedicated fieldset ("Support"), now the first tab after Joomla's native "Plugin" tab; the logo/layout settings are back on their own, unchanged, exactly as before v1.18.1. Total tab count: the original 7 settings tabs are untouched, plus this one new "Support" tab.
+
 ## 1.18.1 (2026-08-04)
 - Added a "Support this plugin" note to the Plugin Options screen (merged into Joomla's native "Plugin" tab, same FG series convention as plg_system_fgemailremover): free/open-source statement, an optional Ko-fi link, and a link to fgcodework.github.io for the rest of the FG extensions. No functional change to the plugin itself.
 - Added .github/FUNDING.yml (Ko-fi) and a matching "Support this project" section + badge in README.md.

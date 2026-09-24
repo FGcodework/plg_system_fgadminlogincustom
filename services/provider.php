@@ -2,7 +2,7 @@
 
 /**
  * @package     plg_system_fgadminlogincustom
- * @version     1.18.1
+ * @version     1.18.2
  * @license     GNU General Public License version 2 or later
  */
 
