@@ -6,7 +6,7 @@
     <creationDate>2026-07</creationDate>
     <copyright>(C) 2026. GNU GPL v2 or later.</copyright>
     <license>GNU General Public License version 2 or later</license>
-    <version>1.18.2</version>
+    <version>1.18.3</version>
     <description>PLG_SYSTEM_FGADMINLOGINCUSTOM_XML_DESCRIPTION</description>
     <namespace path="src">FG\Plugin\System\AdminLoginCustom</namespace>
     <updateservers>
@@ -26,7 +26,7 @@
     </languages>
     <config>
         <fields name="params">
-            <fieldset name="support" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_SUPPORT">
+            <fieldset name="basic">
                 <field
                     name="support_note"
                     type="note"
@@ -35,25 +35,7 @@
                 />
             </fieldset>
 
-            <fieldset name="preset" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_PRESET">
-                <field
-                    name="theme_preset"
-                    type="list"
-                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_LABEL"
-                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_DESC"
-                    default=""
-                >
-                    <option value="">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_NONE</option>
-                    <option value="reset">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_RESET</option>
-                    <option value="dark">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_DARK</option>
-                    <option value="corporate_blue">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_CORPORATE_BLUE</option>
-                    <option value="green">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_GREEN</option>
-                    <option value="orange">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_ORANGE</option>
-                    <option value="minimal">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_MINIMAL</option>
-                </field>
-            </fieldset>
-
-            <fieldset name="basic" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_LOGO">
+            <fieldset name="logo" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_LOGO">
                 <field
                     name="logo"
                     type="media"
@@ -151,6 +133,26 @@
                     <option value="1">JYES</option>
                 </field>
             </fieldset>
+
+            <fieldset name="preset" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_PRESET">
+                <field
+                    name="theme_preset"
+                    type="list"
+                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_LABEL"
+                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_DESC"
+                    default=""
+                >
+                    <option value="">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_NONE</option>
+                    <option value="reset">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_RESET</option>
+                    <option value="dark">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_DARK</option>
+                    <option value="corporate_blue">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_CORPORATE_BLUE</option>
+                    <option value="green">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_GREEN</option>
+                    <option value="orange">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_ORANGE</option>
+                    <option value="minimal">PLG_SYSTEM_FGADMINLOGINCUSTOM_THEME_PRESET_MINIMAL</option>
+                </field>
+            </fieldset>
+
+
 
             <fieldset name="background" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_BACKGROUND">
                 <field

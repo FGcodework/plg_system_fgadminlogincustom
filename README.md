@@ -63,9 +63,9 @@ Settings are grouped into tabs:
 
 | Tab | What it controls |
 | --- | --- |
-| **Support** | A short free/open-source note with an optional Ko-fi link - no plugin settings here. |
+| **Plugin** | Extension info and a short "Support this plugin" note (Ko-fi link, fgcodework.github.io) - no settings on this tab. |
+| **Logo & Layout** | Logo (image, width, optional fixed height + fit mode), template-logo/sidebar/chrome visibility, footer text, "Forgot your login details?" link. |
 | **Theme Preset** | Apply one of six built-in color presets in one go (colors/background only - never touches layout or privacy toggles). |
-| **Plugin** | Logo (image, width, optional fixed height + fit mode), template-logo/sidebar/chrome visibility, footer text, "Forgot your login details?" link. |
 | **Background** | Background type (none/color/gradient/image), colors, gradient angle, image overlay. |
 | **Login card & colors** | Card background/text/radius/shadow, button colors, link color, header-button color matching. |
 | **Header bar** | Header background/text color, language-switcher visibility. |
