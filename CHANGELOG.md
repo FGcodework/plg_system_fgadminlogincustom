@@ -1,5 +1,8 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.18.4 (2026-08-04)
+- Reworked the "Support this plugin" note into a richer layout: a bold intro line, the Ko-fi button image, and a "More FG Extensions" link styled as an Atum-template button (via Atum's own `--atum-btn*` CSS custom properties, so it visually matches the surrounding admin UI). A small inline `<style>` rule removes Joomla's automatic external-link icon on the Ko-fi image link specifically. HTML attributes use single quotes throughout, kept clear of the double quotes that delimit the language string itself.
+
 ## 1.18.3 (2026-08-04)
 - FIX: v1.18.2 still showed the logo/layout settings together with the "Support" note on the native "Plugin" tab (via the labeled "basic" fieldset), and put Support on its own separate tab instead - the reverse of the intended FG series layout. Corrected to match plg_system_fgemailremover exactly: the native "Plugin" tab now shows ONLY the extension info and the "Support this plugin" note (fieldset "basic", unlabeled, note field only) - no settings on it. The logo/layout fields moved to their own dedicated "Logo & Layout" tab (fieldset "logo"), positioned right after "Plugin", ahead of "Theme Preset" - closest to where they effectively sat before this whole change (as part of the merged Plugin tab). All other tabs (Theme Preset, Background, Login card & colors, Header bar, Advanced, Export / Import) are untouched.
 
