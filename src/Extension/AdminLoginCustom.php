@@ -2,7 +2,7 @@
 
 /**
  * @package     plg_system_fgadminlogincustom
- * @version     1.18.4
+ * @version     1.18.5
  * @license     GNU General Public License version 2 or later
  *
  * Visual customization of the /administrator login page (Atum template, Joomla 4/5/6).

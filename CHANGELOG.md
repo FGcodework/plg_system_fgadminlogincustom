@@ -1,5 +1,8 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.18.5 (2026-08-04)
+- Removed the "Support this plugin" label heading above the note on the "Plugin" tab, matching plg_system_fgstripcomments: the field still declares `label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_LABEL"` in the XML, but the translated value of that key is now an empty string in both en-GB and sk-SK - the description content starts directly, with no heading above it.
+
 ## 1.18.4 (2026-08-04)
 - Reworked the "Support this plugin" note into a richer layout: a bold intro line, the Ko-fi button image, and a "More FG Extensions" link styled as an Atum-template button (via Atum's own `--atum-btn*` CSS custom properties, so it visually matches the surrounding admin UI). A small inline `<style>` rule removes Joomla's automatic external-link icon on the Ko-fi image link specifically. HTML attributes use single quotes throughout, kept clear of the double quotes that delimit the language string itself.
 
