@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Joomla language files must stay LF even in a Windows working copy (JED checker requirement)
+*.ini text eol=lf

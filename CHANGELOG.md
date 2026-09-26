@@ -1,5 +1,9 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.18.6 (2026-08-04)
+- JED checker compliance: language files converted to Unix line endings (LF), and a `*.ini text eol=lf` rule added to `.gitattributes` so a Windows working copy no longer turns them back into CRLF.
+- Removed the empty `PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_LABEL` translation (flagged by JED as an empty string). The support note field now simply has no `label` attribute - Joomla's note field then renders no heading at all, so the visible result is the same as in 1.18.5.
+
 ## 1.18.5 (2026-08-04)
 - Removed the "Support this plugin" label heading above the note on the "Plugin" tab, matching plg_system_fgstripcomments: the field still declares `label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_LABEL"` in the XML, but the translated value of that key is now an empty string in both en-GB and sk-SK - the description content starts directly, with no heading above it.
 
