@@ -8,6 +8,7 @@
   <img src="https://img.shields.io/github/v/release/FGcodework/plg_system_fgadminlogincustom?color=FF6B4A&label=release" alt="Latest release">
   <img src="https://img.shields.io/badge/Joomla-6.x-blue.svg?logo=joomla&logoColor=white" alt="Joomla">
   <img src="https://img.shields.io/badge/PHP-8.1%2B-purple.svg?logo=php&logoColor=white" alt="PHP">
+  <a href="https://extensions.joomla.org/extension/administration/admin-styling/fg-admin-login-customizer/"><img src="https://img.shields.io/badge/Joomla!%20Extensions%20Directory%E2%84%A2-AdminLogin-blue" alt="JED"></a>
   <img src="https://img.shields.io/badge/license-GPLv2%2B-green.svg" alt="License">
   <img src="https://img.shields.io/github/downloads/FGcodework/plg_system_fgadminlogincustom/total?cacheSeconds=3600&color=brown" alt="Downloads">
   <a href="https://ko-fi.com/fgcodework"><img src="https://img.shields.io/badge/support-Ko--fi-F16061.svg?logo=ko-fi&logoColor=white" alt="Support on Ko-fi"></a>
