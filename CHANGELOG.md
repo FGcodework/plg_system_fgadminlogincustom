@@ -1,5 +1,14 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.19.1 (2026-10-10)
+- FIX: with a brand color set, the frontend-link button in the header bar kept Atum's default blue. It (and its icon circle) now takes a translucent tint of the header text color, so it fits any brand color. Enabling "Match login button" still overrides it.
+
+## 1.19.0 (2026-10-10)
+- NEW: **Brand color** (Login card & colors tab). One color fills in the login button background (hover is a darker shade), the link color, the header bar background and the focus ring of the login fields; readable text colors are calculated automatically (WCAG). The link color falls back to the brand color only when it keeps a 3:1 contrast on the card background. Any color field set explicitly still overrides it.
+- NEW: **Custom logo - dark mode** (Logo & Layout tab). An optional second logo shown when the administrator uses Atum's dark color scheme, including the "follow the operating system" setting. With no dark logo the single logo is used in every mode, exactly as before.
+- NEW: **Fields and buttons border radius** and **Button shadow** (Login card & colors tab). Only the outer corners of the username/password input groups are rounded, so the joint with the icon or password-toggle button stays flat.
+- Theme preset "Reset" now clears the brand color as well.
+
 ## 1.18.6 (2026-08-04)
 - JED checker compliance: language files converted to Unix line endings (LF), and a `*.ini text eol=lf` rule added to `.gitattributes` so a Windows working copy no longer turns them back into CRLF.
 - Removed the empty `PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELD_SUPPORT_LABEL` translation (flagged by JED as an empty string). The support note field now simply has no `label` attribute - Joomla's note field then renders no heading at all, so the visible result is the same as in 1.18.5.

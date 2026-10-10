@@ -2,7 +2,7 @@
 
 /**
  * @package     plg_system_fgadminlogincustom
- * @version     1.18.6
+ * @version     1.19.1
  * @license     GNU General Public License version 2 or later
  *
  * Visual customization of the /administrator login page (Atum template, Joomla 4/5/6).
@@ -124,11 +124,23 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
         // ------------------------------------------------------------------
         // Custom logo
         // ------------------------------------------------------------------
-        $logo = $this->cleanMediaUrl((string) $this->params->get('logo', ''));
+        $logo     = $this->cleanMediaUrl((string) $this->params->get('logo', ''));
+        $logoDark = $this->cleanMediaUrl((string) $this->params->get('logo_dark', ''));
+
+        // Only a dark-mode logo set: use it for every color scheme.
+        if ($logo === '') {
+            $logo     = $logoDark;
+            $logoDark = '';
+        }
 
         if ($logo !== '') {
-            $img = '<img class="alc-logo-img" src="' . htmlspecialchars($logo, ENT_QUOTES, 'UTF-8')
-                . '" alt="" loading="eager" decoding="async">';
+            $img = $this->logoImgTag($logo, $logoDark !== '' ? 'alc-logo-light' : '');
+
+            // Dark-mode variant: both images are rendered and CSS (see
+            // buildLogoCss) shows the one matching Atum's color scheme.
+            if ($logoDark !== '') {
+                $img .= $this->logoImgTag($logoDark, 'alc-logo-dark');
+            }
 
             // Preferred: swap the content of the native Atum login-logo slot
             // (<div class="main-brand logo text-center"> above the form).
@@ -188,6 +200,36 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
     }
 
     /**
+     * @param string $extraClass Additional CSS class (light/dark variant), may be empty.
+     */
+    private function logoImgTag(string $url, string $extraClass): string
+    {
+        return '<img class="alc-logo-img' . ($extraClass !== '' ? ' ' . $extraClass : '')
+            . '" src="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8')
+            . '" alt="" loading="eager" decoding="async">';
+    }
+
+    /**
+     * Prefixes each selector of a comma-separated list with both login-page
+     * scopes used by Atum (.view-login and body.com_login).
+     */
+    private function scoped(string $selectors): string
+    {
+        $out = [];
+
+        foreach (explode(',', $selectors) as $selector) {
+            $selector = trim($selector);
+
+            if ($selector !== '') {
+                $out[] = '.view-login ' . $selector;
+                $out[] = 'body.com_login ' . $selector;
+            }
+        }
+
+        return implode(', ', $out);
+    }
+
+    /**
      * Builds the inline CSS from plugin parameters.
      */
     private function buildCss(): string
@@ -200,7 +242,9 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
             $this->buildSidebarCss(),
             $this->buildHeaderBarCss($btnColors),
             $this->buildLoginCardCss(),
+            $this->buildControlShapeCss(),
             $this->buildButtonCss($btnColors),
+            $this->buildBrandFocusCss(),
             $this->buildLogoCss(),
             $this->buildFooterCss(),
             $this->buildCustomCss()
@@ -221,8 +265,19 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
      */
     private function resolveButtonColors(): array
     {
-        $bg   = $this->cleanColor((string) $this->params->get('btn_bg', ''));
-        $text = $this->cleanColor((string) $this->params->get('btn_text', ''));
+        $brand = $this->brandColor();
+        $bg    = $this->cleanColor((string) $this->params->get('btn_bg', ''));
+        $hover = $this->cleanColor((string) $this->params->get('btn_hover', ''));
+        $text  = $this->cleanColor((string) $this->params->get('btn_text', ''));
+
+        // Brand color fills in whatever the explicit fields leave empty.
+        if ($bg === '' && $brand !== '') {
+            $bg = $brand;
+
+            if ($hover === '') {
+                $hover = $this->shadeColor($brand, -0.15);
+            }
+        }
 
         if ($text === '' && $bg !== '') {
             $text = $this->autoContrastColor($bg);
@@ -230,9 +285,19 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
 
         return [
             'bg'    => $bg,
-            'hover' => $this->cleanColor((string) $this->params->get('btn_hover', '')),
+            'hover' => $hover,
             'text'  => $text,
         ];
+    }
+
+    /**
+     * The single "brand color" (empty when unset/invalid). Used as the
+     * fallback for the button, link and header colors; any explicitly set
+     * field always wins over it.
+     */
+    private function brandColor(): string
+    {
+        return $this->cleanColor((string) $this->params->get('brand_color', ''));
     }
 
     /**
@@ -360,6 +425,10 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
         $headerBg   = $this->cleanColor((string) $this->params->get('header_bg', ''));
         $headerText = $this->cleanColor((string) $this->params->get('header_text', ''));
 
+        if ($headerBg === '') {
+            $headerBg = $this->brandColor();
+        }
+
         if ($headerText === '' && $headerBg !== '') {
             $headerText = $this->autoContrastColor($headerBg);
         }
@@ -373,6 +442,26 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
                 . ' .view-login #header .header-item-icon, .view-login #header .icon-angle-down,'
                 . ' body.com_login #header, body.com_login #header a'
                 . ' { color: ' . $headerText . ' !important; }';
+        }
+
+        // With a brand color the frontend-link pill (Atum's own blue) would
+        // clash with the header; give it and its icon circle a translucent
+        // tint of the header text color so it follows any brand color.
+        // "Match login button" below takes over when it is enabled.
+        if ($this->brandColor() !== '' && $headerBg !== ''
+            && (int) $this->params->get('header_match_btn', 0) !== 1) {
+            $onDark = $headerText === '#ffffff';
+
+            $css[] = '.view-login #header a.header-item-content, body.com_login #header a.header-item-content'
+                . ' { background-color: ' . ($onDark ? 'rgba(255, 255, 255, 0.16)' : 'rgba(0, 0, 0, 0.10)')
+                . ' !important; }';
+            $css[] = '.view-login #header a.header-item-content:hover, body.com_login #header a.header-item-content:hover'
+                . ' { background-color: ' . ($onDark ? 'rgba(255, 255, 255, 0.26)' : 'rgba(0, 0, 0, 0.18)')
+                . ' !important; }';
+            $css[] = '.view-login #header a.header-item-content .header-item-icon > *,'
+                . ' body.com_login #header a.header-item-content .header-item-icon > *'
+                . ' { background-color: ' . ($onDark ? 'rgba(0, 0, 0, 0.28)' : 'rgba(255, 255, 255, 0.6)')
+                . ' !important; }';
         }
 
         if ((int) $this->params->get('hide_lang_switcher', 0) === 1) {
@@ -457,6 +546,65 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
     }
 
     /**
+     * Corner radius for inputs and buttons and a shadow preset for buttons.
+     * Inputs here are Bootstrap input groups (field + icon/toggle button), so
+     * only the outer corners of a group are rounded and the joint stays flat.
+     *
+     * @return string[]
+     */
+    private function buildControlShapeCss(): array
+    {
+        $css    = [];
+        $radius = trim((string) $this->params->get('ctrl_radius', ''));
+        $shadow = (string) $this->params->get('btn_shadow', 'none');
+
+        if ($radius !== '' && is_numeric($radius)) {
+            $r = max(0, min(40, (int) $radius)) . 'px';
+
+            $css[] = $this->scoped('.login .form-control, .login .form-select, .login .input-group-text, .login .btn')
+                . ' { border-radius: ' . $r . ' !important; }';
+            $css[] = $this->scoped('.login .input-group > :not(:first-child)')
+                . ' { border-start-start-radius: 0 !important; border-end-start-radius: 0 !important; }';
+            $css[] = $this->scoped('.login .input-group > :not(:last-child)')
+                . ' { border-start-end-radius: 0 !important; border-end-end-radius: 0 !important; }';
+        }
+
+        $shadowValues = [
+            'subtle' => '0 1px 2px rgba(0, 0, 0, 0.2)',
+            'medium' => '0 3px 8px rgba(0, 0, 0, 0.22)',
+            'strong' => '0 6px 16px rgba(0, 0, 0, 0.3)',
+        ];
+
+        if (isset($shadowValues[$shadow])) {
+            $css[] = $this->scoped('.login .btn-primary, .login .btn-secondary')
+                . ' { box-shadow: ' . $shadowValues[$shadow] . ' !important; }';
+        }
+
+        return $css;
+    }
+
+    /**
+     * Keeps the focus ring of the login fields in the brand color, so a
+     * single brand color is not undermined by Bootstrap's default blue ring.
+     *
+     * @return string[]
+     */
+    private function buildBrandFocusCss(): array
+    {
+        $brand = $this->brandColor();
+
+        if ($brand === '') {
+            return [];
+        }
+
+        return [
+            $this->scoped('.login .form-control:focus, .login .form-select:focus')
+                . ' { border-color: ' . $brand . ' !important;'
+                . ' box-shadow: 0 0 0 0.2rem ' . $this->hexToRgba($brand, 25) . ' !important; }',
+        ];
+    }
+
+    /**
      * Login/passkey buttons and generic link color.
      *
      * @param array{bg: string, hover: string, text: string} $btnColors
@@ -489,6 +637,16 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
 
         $linkColor = $this->cleanColor((string) $this->params->get('link_color', ''));
 
+        // Brand color as link color only when it stays readable (WCAG 3:1,
+        // the large-text/UI threshold) on the card background.
+        if ($linkColor === '' && $this->brandColor() !== '') {
+            $cardBg = $this->cleanColor((string) $this->params->get('card_bg', '')) ?: '#ffffff';
+
+            if ($this->contrastRatio($this->brandColor(), $cardBg) >= 3.0) {
+                $linkColor = $this->brandColor();
+            }
+        }
+
         if ($linkColor !== '') {
             $css[] = '.view-login a:not(.btn), body.com_login a:not(.btn) { color: ' . $linkColor . ' !important; }';
         }
@@ -518,7 +676,7 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
             $imgRule = 'max-width: ' . $logoWidth . 'px; width: auto !important; height: auto !important;';
         }
 
-        return [
+        $css = [
             '.view-login .alc-logo, body.com_login .alc-logo, .view-login .login .main-brand'
                 . ' { display: flex !important; justify-content: center !important; align-items: center;'
                 . ' width: 100% !important; margin: 0 auto 1.5rem !important; text-align: center !important;'
@@ -526,6 +684,27 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
             '.alc-logo img, .alc-logo-img, .view-login .login .main-brand img'
                 . ' { display: block !important; margin: 0 auto !important; ' . $imgRule . ' }',
         ];
+
+        if ((string) $this->params->get('logo', '') !== '' && (string) $this->params->get('logo_dark', '') !== '') {
+            // Atum color scheme: explicit dark = html[data-color-scheme="dark"];
+            // "follow OS" = html[data-color-scheme-os] + prefers-color-scheme
+            // (the explicit attribute only appears after Atum's script ran).
+            // "html:root body" keeps the specificity above the display rule
+            // of the generic logo selector.
+            $img   = 'html:root body img.alc-logo-img';
+            $css[] = $img . '.alc-logo-dark { display: none !important; }';
+            $css[] = 'html:root[data-color-scheme="dark"] body img.alc-logo-img.alc-logo-dark'
+                . ' { display: block !important; }';
+            $css[] = 'html:root[data-color-scheme="dark"] body img.alc-logo-img.alc-logo-light'
+                . ' { display: none !important; }';
+            $css[] = '@media (prefers-color-scheme: dark) {'
+                . ' html:root[data-color-scheme-os]:not([data-color-scheme="light"]) body img.alc-logo-img.alc-logo-dark'
+                . ' { display: block !important; }'
+                . ' html:root[data-color-scheme-os]:not([data-color-scheme="light"]) body img.alc-logo-img.alc-logo-light'
+                . ' { display: none !important; } }';
+        }
+
+        return $css;
     }
 
     /**
@@ -832,7 +1011,7 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
             'bg_type' => 'none', 'bg_color' => '', 'grad_start' => '', 'grad_end' => '',
             'card_bg' => '', 'card_text' => '', 'card_radius' => '',
             'btn_bg' => '', 'btn_hover' => '', 'btn_text' => '', 'link_color' => '',
-            'header_bg' => '', 'header_text' => '',
+            'header_bg' => '', 'header_text' => '', 'brand_color' => '',
         ];
 
         return [
@@ -968,11 +1147,20 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
      */
     private function autoContrastColor(string $hexBg): string
     {
-        $hex = ltrim($hexBg, '#');
+        $luminance = $this->relativeLuminance($hexBg);
 
-        if (\strlen($hex) === 3) {
-            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
-        }
+        $contrastWithWhite = 1.05 / ($luminance + 0.05);
+        $contrastWithBlack = ($luminance + 0.05) / 0.05;
+
+        return $contrastWithWhite >= $contrastWithBlack ? '#ffffff' : '#000000';
+    }
+
+    /**
+     * WCAG relative luminance (0..1) of a #rgb / #rrggbb / #rrggbbaa color.
+     */
+    private function relativeLuminance(string $hex): float
+    {
+        [$r, $g, $b] = $this->hexToRgb($hex);
 
         $linearize = static function (int $channel): float {
             $c = $channel / 255;
@@ -980,16 +1168,53 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
             return $c <= 0.04045 ? $c / 12.92 : (($c + 0.055) / 1.055) ** 2.4;
         };
 
-        $r = $linearize((int) hexdec(substr($hex, 0, 2)));
-        $g = $linearize((int) hexdec(substr($hex, 2, 2)));
-        $b = $linearize((int) hexdec(substr($hex, 4, 2)));
+        return 0.2126 * $linearize($r) + 0.7152 * $linearize($g) + 0.0722 * $linearize($b);
+    }
 
-        $luminance = 0.2126 * $r + 0.7152 * $g + 0.0722 * $b;
+    /**
+     * WCAG contrast ratio (1..21) between two hex colors.
+     */
+    private function contrastRatio(string $hexA, string $hexB): float
+    {
+        $a = $this->relativeLuminance($hexA);
+        $b = $this->relativeLuminance($hexB);
 
-        $contrastWithWhite = 1.05 / ($luminance + 0.05);
-        $contrastWithBlack = ($luminance + 0.05) / 0.05;
+        return (max($a, $b) + 0.05) / (min($a, $b) + 0.05);
+    }
 
-        return $contrastWithWhite >= $contrastWithBlack ? '#ffffff' : '#000000';
+    /**
+     * Darkens (negative $amount) or lightens (positive) a color by mixing it
+     * with black or white; alpha channel, if any, is dropped.
+     */
+    private function shadeColor(string $hex, float $amount): string
+    {
+        $target = $amount < 0 ? 0 : 255;
+        $weight = min(1.0, abs($amount));
+        $out    = '#';
+
+        foreach ($this->hexToRgb($hex) as $channel) {
+            $out .= sprintf('%02x', (int) round($channel + ($target - $channel) * $weight));
+        }
+
+        return $out;
+    }
+
+    /**
+     * @return array{0: int, 1: int, 2: int}
+     */
+    private function hexToRgb(string $hex): array
+    {
+        $hex = ltrim($hex, '#');
+
+        if (\strlen($hex) === 3) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+
+        return [
+            (int) hexdec(substr($hex, 0, 2)),
+            (int) hexdec(substr($hex, 2, 2)),
+            (int) hexdec(substr($hex, 4, 2)),
+        ];
     }
 
     /**

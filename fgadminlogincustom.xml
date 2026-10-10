@@ -6,7 +6,7 @@
     <creationDate>2026-07</creationDate>
     <copyright>(C) 2026. GNU GPL v2 or later.</copyright>
     <license>GNU General Public License version 2 or later</license>
-    <version>1.18.6</version>
+    <version>1.19.1</version>
     <description>PLG_SYSTEM_FGADMINLOGINCUSTOM_XML_DESCRIPTION</description>
     <namespace path="src">FG\Plugin\System\AdminLoginCustom</namespace>
     <updateservers>
@@ -40,6 +40,12 @@
                     type="media"
                     label="PLG_SYSTEM_FGADMINLOGINCUSTOM_LOGO_LABEL"
                     description="PLG_SYSTEM_FGADMINLOGINCUSTOM_LOGO_DESC"
+                />
+                <field
+                    name="logo_dark"
+                    type="media"
+                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_LOGO_DARK_LABEL"
+                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_LOGO_DARK_DESC"
                 />
                 <field
                     name="logo_width"
@@ -222,6 +228,12 @@
 
             <fieldset name="cardstyle" label="PLG_SYSTEM_FGADMINLOGINCUSTOM_FIELDSET_CARD">
                 <field
+                    name="brand_color"
+                    type="color"
+                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_BRAND_COLOR_LABEL"
+                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_BRAND_COLOR_DESC"
+                />
+                <field
                     name="card_bg"
                     type="color"
                     label="PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_BG_LABEL"
@@ -245,6 +257,27 @@
                     type="list"
                     label="PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_SHADOW_LABEL"
                     description="PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_SHADOW_DESC"
+                    default="none"
+                >
+                    <option value="none">PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_SHADOW_NONE</option>
+                    <option value="subtle">PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_SHADOW_SUBTLE</option>
+                    <option value="medium">PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_SHADOW_MEDIUM</option>
+                    <option value="strong">PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_SHADOW_STRONG</option>
+                </field>
+                <field
+                    name="ctrl_radius"
+                    type="number"
+                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_CTRL_RADIUS_LABEL"
+                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_CTRL_RADIUS_DESC"
+                    default=""
+                    min="0"
+                    max="40"
+                />
+                <field
+                    name="btn_shadow"
+                    type="list"
+                    label="PLG_SYSTEM_FGADMINLOGINCUSTOM_BTN_SHADOW_LABEL"
+                    description="PLG_SYSTEM_FGADMINLOGINCUSTOM_BTN_SHADOW_DESC"
                     default="none"
                 >
                     <option value="none">PLG_SYSTEM_FGADMINLOGINCUSTOM_CARD_SHADOW_NONE</option>

@@ -28,7 +28,14 @@ Part of the **FG** series of Joomla extensions.
   and `contain`/`cover` fit modes
 - **Background**: solid color, gradient, or image (with a color+opacity
   overlay for readability)
+- **Brand color**: set one color and the login button (hover is a darker
+  shade), links, header bar and field focus ring follow it - any color field
+  you set explicitly still wins
+- **Light and dark logo**: an optional second logo for Atum's dark color
+  scheme (also when it follows the operating system)
 - **Login card**: background, text color, border radius, shadow presets
+- **Fields and buttons**: corner radius for the input fields and buttons,
+  shadow presets for buttons
 - **Automatic contrast**: leave a text-color field empty and it is
   computed from the matching background color (WCAG relative luminance),
   so a dark background never silently ends up with unreadable text
@@ -65,10 +72,10 @@ Settings are grouped into tabs:
 | Tab | What it controls |
 | --- | --- |
 | **Plugin** | Extension info and a short "Support this plugin" note (Ko-fi link, fgcodework.github.io) - no settings on this tab. |
-| **Logo & Layout** | Logo (image, width, optional fixed height + fit mode), template-logo/sidebar/chrome visibility, footer text, "Forgot your login details?" link. |
+| **Logo & Layout** | Logo (image, optional dark-mode logo, width, optional fixed height + fit mode), template-logo/sidebar/chrome visibility, footer text, "Forgot your login details?" link. |
 | **Theme Preset** | Apply one of six built-in color presets in one go (colors/background only - never touches layout or privacy toggles). |
 | **Background** | Background type (none/color/gradient/image), colors, gradient angle, image overlay. |
-| **Login card & colors** | Card background/text/radius/shadow, button colors, link color, header-button color matching. |
+| **Login card & colors** | Brand color, card background/text/radius/shadow, field and button radius, button shadow and colors, link color, header-button color matching. |
 | **Header bar** | Header background/text color, language-switcher visibility. |
 | **Advanced** | Custom CSS and custom JavaScript, injected only on the login page (see the note below). |
 | **Export / Import** | Read-only JSON export of current settings; paste JSON here + Save (twice) to import a configuration from another site. Custom JavaScript is never imported. |
