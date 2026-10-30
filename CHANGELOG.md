@@ -1,5 +1,10 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.19.3 (2026-10-30)
+- FIX: the settings import now validates every value instead of copying it blindly: colors must be valid hex, numbers must lie in the range of their field, lists and switches must hold an allowed option, media paths may not carry markup or script schemes. Footer text carrying scripts, frames, inline event handlers or `javascript:` links and custom CSS that could leave its `<style>` element are refused. Invalid values are skipped and listed in a warning; unknown keys are ignored.
+- CHANGE: internal restructuring, no visual change. The 1250-line plugin class is split into `Helper/CssBuilder`, `Helper/BodyModifier` (logo and footer), `Helper/ImportExport`, `Helper/ThemePresets`, `Helper/MediaUrl`, `Helper/ColorHelper` and `Helper/SettingsSanitizer`; the plugin class only wires events. The generated CSS and the modified login page were compared with 1.19.2 for 7 configurations and are identical.
+- Test suite (`php tests/run.php`, 61 assertions) for the helpers, including a check that every theme preset passes the import validation.
+
 ## 1.19.2 (2026-10-17)
 - NEW: recovery switch. Opening the login page as `/administrator?fgalc=off` skips all visual customization for that request (logo, colors, footer, custom CSS and JavaScript), so a faulty custom rule can never lock you out of the login form. Nothing is saved or changed, and the generator meta tag stays hidden.
 

@@ -1,4 +1,4 @@
-﻿<p align="center">
+<p align="center">
   <img src="assets/logo.webp" alt="plg_system_fgadminlogincustom logo" width="128" height="128">
 </p>
 
@@ -128,3 +128,11 @@ GNU General Public License v2.0 or later - see [LICENSE](LICENSE).
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md).
+
+## Development
+
+The color maths, the CSS builder, the login-page body changes, the import/export handling and the import validation have no Joomla dependency and are covered by plain-PHP tests:
+
+```
+php tests/run.php
+```
