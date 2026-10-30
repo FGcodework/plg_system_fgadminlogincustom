@@ -83,6 +83,13 @@ Settings are grouped into tabs:
 Every color field left empty falls back to the Atum template's own
 styling - nothing is forced unless you set it.
 
+## Recovery switch
+
+If a custom CSS or JavaScript rule ever breaks the login form, open
+`/administrator?fgalc=off`. That one request skips every customization of
+this plugin, so you can log in and fix the setting. Nothing is saved or
+changed by the switch.
+
 ## A note on Custom JavaScript
 
 The **Custom JavaScript** field runs its code on the administrator login

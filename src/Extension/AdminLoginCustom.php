@@ -2,7 +2,7 @@
 
 /**
  * @package     plg_system_fgadminlogincustom
- * @version     1.19.1
+ * @version     1.19.2
  * @license     GNU General Public License version 2 or later
  *
  * Visual customization of the /administrator login page (Atum template, Joomla 4/5/6).
@@ -67,6 +67,17 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
     }
 
     /**
+     * Recovery switch: opening the login page with ?fgalc=off skips all
+     * visual customization for that one request (nothing is saved or
+     * changed), so a custom CSS/JS rule that broke the login form can never
+     * lock anyone out. The generator tag stays hidden either way.
+     */
+    private function isSafeMode(): bool
+    {
+        return $this->getApplication()->getInput()->getCmd('fgalc', '') === 'off';
+    }
+
+    /**
      * Injects inline CSS/JS into the administrator login page only.
      */
     public function injectAssets(Event $event): void
@@ -84,6 +95,10 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
         // Do not reveal the CMS in <meta name="generator">.
         if ((int) $this->params->get('hide_generator', 1) === 1) {
             $doc->setGenerator('');
+        }
+
+        if ($this->isSafeMode()) {
+            return;
         }
 
         $wa = $doc->getWebAssetManager();
@@ -108,7 +123,7 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
      */
     public function modifyBody(Event $event): void
     {
-        if (!$this->isLoginPage()) {
+        if (!$this->isLoginPage() || $this->isSafeMode()) {
             return;
         }
 

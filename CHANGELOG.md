@@ -1,5 +1,8 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.19.2 (2026-10-17)
+- NEW: recovery switch. Opening the login page as `/administrator?fgalc=off` skips all visual customization for that request (logo, colors, footer, custom CSS and JavaScript), so a faulty custom rule can never lock you out of the login form. Nothing is saved or changed, and the generator meta tag stays hidden.
+
 ## 1.19.1 (2026-10-10)
 - FIX: with a brand color set, the frontend-link button in the header bar kept Atum's default blue. It (and its icon circle) now takes a translucent tint of the header text color, so it fits any brand color. Enabling "Match login button" still overrides it.
 
