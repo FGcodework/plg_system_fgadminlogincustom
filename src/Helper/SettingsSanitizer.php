@@ -25,7 +25,7 @@ final class SettingsSanitizer
 
     private const FLAGS = [
         'hide_template_logo', 'hide_sidebar', 'hide_generator', 'hide_forgot', 'hide_chrome',
-        'hide_lang_switcher', 'header_match_btn',
+        'hide_lang_switcher', 'header_match_btn', 'use_page_style',
     ];
 
     private const SHADOWS = ['none', 'subtle', 'medium', 'strong'];

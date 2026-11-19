@@ -2,7 +2,7 @@
 
 /**
  * @package     plg_system_fgadminlogincustom
- * @version     1.19.3
+ * @version     1.19.4
  * @license     GNU General Public License version 2 or later
  *
  * Visual customization of the /administrator login page (Atum template, Joomla 4/5/6).
@@ -17,14 +17,17 @@ use FG\Plugin\System\AdminLoginCustom\Helper\CssBuilder;
 use FG\Plugin\System\AdminLoginCustom\Helper\ImportExport;
 use FG\Plugin\System\AdminLoginCustom\Helper\MediaUrl;
 use FG\Plugin\System\AdminLoginCustom\Helper\SettingsSanitizer;
+use FG\Plugin\System\AdminLoginCustom\Helper\SharedStyle;
 use FG\Plugin\System\AdminLoginCustom\Helper\ThemePresets;
 use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\Event\Event;
 use Joomla\Event\SubscriberInterface;
+use Joomla\Registry\Registry;
 
 \defined('_JEXEC') or die;
 
@@ -82,6 +85,32 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
     }
 
     /**
+     * Own settings, with brand color, radii and shadows taken from
+     * plg_system_fgadminpagecustom when "Use style of FG Admin Page
+     * Customizer" is on and that plugin is installed and enabled.
+     */
+    private function effectiveParams(): Registry
+    {
+        if ((int) $this->params->get('use_page_style', 0) !== 1) {
+            return $this->params;
+        }
+
+        $page = null;
+
+        try {
+            $plugin = PluginHelper::getPlugin('system', 'fgadminpagecustom');
+
+            if (\is_object($plugin) && !empty($plugin->params)) {
+                $page = new Registry($plugin->params);
+            }
+        } catch (\Throwable $e) {
+            $page = null;
+        }
+
+        return SharedStyle::apply($this->params, $page);
+    }
+
+    /**
      * Injects inline CSS/JS into the administrator login page only.
      */
     public function injectAssets(Event $event): void
@@ -107,7 +136,7 @@ final class AdminLoginCustom extends CMSPlugin implements SubscriberInterface
 
         $wa = $doc->getWebAssetManager();
 
-        $css = (new CssBuilder($this->params))->build();
+        $css = (new CssBuilder($this->effectiveParams()))->build();
 
         if ($css !== '') {
             $wa->addInlineStyle($css, ['name' => 'plg.system.fgadminlogincustom.style']);

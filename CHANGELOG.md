@@ -1,5 +1,8 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.19.4 (2026-11-19)
+- NEW: option "Use style of FG Admin Page Customizer" (Login card & colors tab, off by default). When on, brand color, corner radii (fields, buttons, card) and shadow presets are taken from the plugin FG Admin Page Customizer, so the login page and the administrator share one look without entering the values twice. Empty or invalid shared values are ignored; without that plugin (or when it is disabled) the settings of this plugin apply as before.
+
 ## 1.19.3 (2026-10-30)
 - FIX: the settings import now validates every value instead of copying it blindly: colors must be valid hex, numbers must lie in the range of their field, lists and switches must hold an allowed option, media paths may not carry markup or script schemes. Footer text carrying scripts, frames, inline event handlers or `javascript:` links and custom CSS that could leave its `<style>` element are refused. Invalid values are skipped and listed in a warning; unknown keys are ignored.
 - CHANGE: internal restructuring, no visual change. The 1250-line plugin class is split into `Helper/CssBuilder`, `Helper/BodyModifier` (logo and footer), `Helper/ImportExport`, `Helper/ThemePresets`, `Helper/MediaUrl`, `Helper/ColorHelper` and `Helper/SettingsSanitizer`; the plugin class only wires events. The generated CSS and the modified login page were compared with 1.19.2 for 7 configurations and are identical.

@@ -10,7 +10,7 @@ define('_JEXEC', 1);
 
 require __DIR__ . '/registry_stub.php';
 
-foreach (['ColorHelper', 'MediaUrl', 'SettingsSanitizer', 'ImportExport', 'BodyModifier', 'ThemePresets', 'CssBuilder'] as $h) {
+foreach (['ColorHelper', 'MediaUrl', 'SettingsSanitizer', 'ImportExport', 'BodyModifier', 'ThemePresets', 'CssBuilder', 'SharedStyle'] as $h) {
     require __DIR__ . '/../src/Helper/' . $h . '.php';
 }
 
@@ -21,6 +21,7 @@ use FG\Plugin\System\AdminLoginCustom\Helper\ImportExport as IE;
 use FG\Plugin\System\AdminLoginCustom\Helper\MediaUrl as M;
 use FG\Plugin\System\AdminLoginCustom\Helper\SettingsSanitizer as S;
 use FG\Plugin\System\AdminLoginCustom\Helper\ThemePresets as P;
+use FG\Plugin\System\AdminLoginCustom\Helper\SharedStyle as SS;
 use Joomla\Registry\Registry;
 
 $fail = 0;
@@ -129,6 +130,21 @@ $css = (new B(new Registry(['brand_color' => '#8b5a2b'])))->build();
 $eq(str_contains($css, '#8b5a2b'), true, 'css brand color present');
 $eq(str_contains((new B(new Registry(['ctrl_radius' => '99'])))->build(), 'border-radius: 40px'), true, 'css radius clamped');
 $eq(str_contains((new B(new Registry(['custom_css' => '.x{color:red}'])))->build(), '.x{color:red}'), true, 'css custom appended');
+
+// SharedStyle
+$own  = new Registry(['use_page_style' => '1', 'brand_color' => '#111111', 'ctrl_radius' => '4', 'btn_shadow' => 'none']);
+$page = new Registry(['brand_color' => '#8B5A2B', 'ctrl_radius' => '12', 'card_radius' => '99', 'btn_shadow' => 'medium', 'card_shadow' => 'huge']);
+$eff  = SS::apply($own, $page);
+$eq($eff->get('brand_color'), '#8b5a2b', 'shared brand');
+$eq($eff->get('ctrl_radius'), '12', 'shared ctrl radius');
+$eq($eff->get('card_radius', 'x'), 'x', 'shared out-of-range radius ignored');
+$eq($eff->get('btn_shadow'), 'medium', 'shared btn shadow');
+$eq($eff->get('card_shadow', 'none'), 'none', 'shared invalid shadow ignored');
+$eq($own->get('brand_color'), '#111111', 'own params not modified');
+$eq(SS::apply($own, null), $own, 'no page plugin -> own');
+$eq(SS::apply(new Registry(['brand_color' => '#111111']), $page)->get('brand_color'), '#111111', 'switch off -> own');
+$eq(SS::apply($own, new Registry(['brand_color' => '', 'ctrl_radius' => '']))->get('brand_color'), '#111111', 'empty shared keeps own');
+$eq(S::sanitize(['use_page_style' => '1'])['values']['use_page_style'], 1, 'san use_page_style');
 
 echo $fail === 0 ? "OK: $n assertions passed\n" : "$fail of $n FAILED\n";
 exit($fail === 0 ? 0 : 1);
