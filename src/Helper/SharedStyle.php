@@ -2,7 +2,7 @@
 
 /**
  * @package     plg_system_fgadminlogincustom
- * @version     1.19.4
+ * @version     1.19.5
  * @license     GNU General Public License version 2 or later
  *
  * Optional shared look with plg_system_fgadminpagecustom (FG Admin Page

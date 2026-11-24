@@ -2,17 +2,17 @@
 <updates>
     <update>
         <name>System - FG Admin Login Customizer</name>
-        <description>Restyles the /administrator login page - custom logo, background, colors, and branding, with WCAG auto-contrast.</description>
+        <description>DEPRECATED - replaced by FG Admin Customizer (plg_system_fgadmincustom). Restyles the /administrator login page - custom logo, background, colors, and branding, with WCAG auto-contrast.</description>
         <element>fgadminlogincustom</element>
         <type>plugin</type>
         <folder>system</folder>
         <client>site</client>
-        <version>1.19.4</version>
+        <version>1.19.5</version>
         <infourl title="System - FG Admin Login Customizer">https://github.com/FGcodework/plg_system_fgadminlogincustom</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/FGcodework/plg_system_fgadminlogincustom/releases/download/v1.19.4/plg_system_fgadminlogincustom_v1.19.4.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/FGcodework/plg_system_fgadminlogincustom/releases/download/v1.19.5/plg_system_fgadminlogincustom_v1.19.5.zip</downloadurl>
         </downloads>
-        <sha256>5200be714c96d6c02995c37c01df1a2e06d762742f6d07b2625e29d0f8400fc7</sha256>
+        <sha256>08d7d01a494bca69f30f8ff0c58fe22a68a6611e138373871883c8e5a84a40b9</sha256>
         <tags>
             <tag>stable</tag>
         </tags>

@@ -1,5 +1,8 @@
 # Changelog - plg_system_fgadminlogincustom
 
+## 1.19.5 (2026-11-24)
+- CHANGE: final release. The plugin is deprecated and no longer developed; it is replaced by [FG Admin Customizer](https://github.com/FGcodework/plg_system_fgadmincustom), which takes over its settings. A notice is shown in the plugin description and settings. No functional change.
+
 ## 1.19.4 (2026-11-19)
 - NEW: option "Use style of FG Admin Page Customizer" (Login card & colors tab, off by default). When on, brand color, corner radii (fields, buttons, card) and shadow presets are taken from the plugin FG Admin Page Customizer, so the login page and the administrator share one look without entering the values twice. Empty or invalid shared values are ignored; without that plugin (or when it is disabled) the settings of this plugin apply as before.
 
